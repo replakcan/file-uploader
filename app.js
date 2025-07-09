@@ -6,6 +6,7 @@ const passport = require('passport')
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store')
 const multer = require('multer')
 const upload = multer({ dest: 'uploads/' })
+const authRouter = require('./routes/authRouter')
 const prisma = require('./lib/prisma')
 
 const app = express()
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/', authRouter)
 
 app.use((err, req, res, next) => {
   console.log(err)
